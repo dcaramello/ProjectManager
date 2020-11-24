@@ -20,6 +20,8 @@ class ProjectController extends AbstractController
      */
     public function index(ProjectRepository $projectRepository): Response
     {
+        $user = $this->getUser();
+        dump($user);
         return $this->render('project/index.html.twig', [
             'projects' => $projectRepository->findAll(),
         ]);
@@ -30,11 +32,16 @@ class ProjectController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
+
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $project->setUserId($user->getId());
+            $project->setRegistered(new \DateTime());
+            $project->setStatus("in progress");
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();

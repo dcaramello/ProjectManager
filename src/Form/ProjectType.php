@@ -14,10 +14,9 @@ class ProjectType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('registered')
+            // ->add('registered')
             ->add('deadline')
-            ->add('status')
-            ->add('user_id')
+            // ->add('status')
         ;
     }
 

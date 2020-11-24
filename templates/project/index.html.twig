@@ -1,25 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
 
 {% block title %}Project index{% endblock %}
 
-{% block body %}
-    <h1>Project index</h1>
+{% block main %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Registered</th>
-                <th>Deadline</th>
-                <th>Status</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="">
+    <h1 class="row justify-content-md-center my-3">Vos projets</h1>
+    <div class="row justify-content-md-center">
         {% for project in projects %}
-            <tr>
+        
+            <div class="col- col-sm-12 col-lg-3">
+                <div class="card text-white bg-secondary m-5 mb-5 animate__animated animate__bounceInLeft" style="max-width: 20rem;">
+                    <div class="card-header">{{ project.registered ? project.registered|date('Y-m-d') : '' }}</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ project.title }}</h4>
+                        <p class="card-text">{{ project.description }}</p>
+                        <p class="card-title">Deadline : {{ project.deadline ? project.deadline|date('Y-m-d') : '' }}</p>
+                    </div>
+                        <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
+                        <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>    
+</div>
+            {# <tr>
                 <td>{{ project.id }}</td>
                 <td>{{ project.title }}</td>
                 <td>{{ project.description }}</td>
@@ -34,10 +39,7 @@
         {% else %}
             <tr>
                 <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </tr> #}
 
-    <a href="{{ path('project_new') }}">Create new</a>
+    {# <a href="{{ path('project_new') }}">Create new</a> #}
 {% endblock %}
