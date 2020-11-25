@@ -1,19 +1,19 @@
 {% extends 'template.html.twig' %}
 
-{% block title %}Project index{% endblock %}
+{% block title %}Project{% endblock %}
 
 {% block main %}
 
-<div class="">
-    <h1 class="row justify-content-md-center my-3">Vos projets</h1>
-    <div class="row justify-content-md-center">
+<div class="container">
+    <h1 class="row justify-content-md-center my-3 mx-0 indieFlower">Vos projets</h1>
+    <div class="row justify-content-md-center m-0">
         {% for project in projects %}
         
-            <div class="col- col-sm-12 col-lg-3">
-                <div class="card text-white bg-secondary m-5 mb-5 animate__animated animate__bounceInLeft" style="max-width: 20rem;">
+            <div class="col- col-sm-6 col-lg-3 justify-content-md-center">
+                <div class="card text-white bg-secondary mb-5 animate__animated animate__bounceInLeft" style="max-width: 20rem;">
                     <div class="card-header">{{ project.registered ? project.registered|date('Y-m-d') : '' }}</div>
                     <div class="card-body">
-                        <h4 class="card-title">{{ project.title }}</h4>
+                        <h4 class="card-title indieFlower">{{ project.title }}</h4>
                         <p class="card-text">{{ project.description }}</p>
                         <p class="card-title">Deadline : {{ project.deadline ? project.deadline|date('Y-m-d') : '' }}</p>
                     </div>
