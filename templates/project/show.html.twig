@@ -1,42 +1,39 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
 
 {% block title %}Project{% endblock %}
 
-{% block body %}
-    <h1>Project</h1>
+{% block main %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ project.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ project.description }}</td>
-            </tr>
-            <tr>
-                <th>Registered</th>
-                <td>{{ project.registered ? project.registered|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Deadline</th>
-                <td>{{ project.deadline ? project.deadline|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ project.status }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="card mb-3 bg-light animate__animated animate__bounceInLeft">
+    <h3 class="card-header indieFlower d-flex justify-content-center">{{ project.title }}</h3>
+    <div class="card-body">
+        <h5 class="card-title d-flex justify-content-center">{{ project.description }}</h5>
+    </div>
+    <img src="\img\chantier.jpg" alt="chantier">
+    <div class="card-body">
+        <h5 class="card-title d-flex justify-content-between">A faire</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for task in tasks %}
+            <li class="list-group-item d-flex justify-content-between">
+                <span class="indieFlower">{{ task.title }}</span>
+                <div>
+                    <span>Deadline: {{ task.deadline|date('Y-m-d')  }}</span>
+                    <button type="button" class="btn btn-outline-primary">Modifier</button>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="card-body">
+        <a href="{{ path('task_new', {id: project.id}) }}" class="card-link">Ajouter une tâche</a>
+    </div>
+    <div class="card-footer text-muted">
+        Deadline du projet : {{ project.deadline }}
+    </div>
+</div>
+<a href="{{ path('project_index') }}">back to list</a>
 
-    <a href="{{ path('project_index') }}">back to list</a>
-
-    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+<a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
 
     {{ include('project/_delete_form.html.twig') }}
 {% endblock %}

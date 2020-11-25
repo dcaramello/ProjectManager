@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\Task;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,23 +12,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-
-// pour proteger toutes les routes de l'application
 /**
  * @IsGranted("IS_AUTHENTICATED_FULLY")
- * @Route("/index")
+ * @Route("/project")
  */
 class ProjectController extends AbstractController
 {
     /**
-     * @Route("/", name="/", methods={"GET"})
+     * @Route("/", name="project_index", methods={"GET"})
      */
-    public function index(ProjectRepository $projectRepository): Response
+    public function index(): Response
     {
         $user = $this->getUser();
-        dump($user);
+        $projects = $user->getProjects();
         return $this->render('project/index.html.twig', [
-            'projects' => $projectRepository->findAll(),
+            'projects' => $projects,
         ]);
     }
 
@@ -43,7 +42,7 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $project->setUserId($user->getId());
+            $project->setUserId($user);
             $project->setRegistered(new \DateTime());
             $project->setStatus("in progress");
             $entityManager = $this->getDoctrine()->getManager();
@@ -63,9 +62,12 @@ class ProjectController extends AbstractController
      * @Route("/{id}", name="project_show", methods={"GET"})
      */
     public function show(Project $project): Response
-    {
+    {   
+        $tasks = $project->getTasks();
+        
         return $this->render('project/show.html.twig', [
             'project' => $project,
+            'tasks' => $tasks,
         ]);
     }
 

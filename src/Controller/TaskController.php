@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Project;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
@@ -9,10 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @IsGranted("IS_AUTHENTICATED_FULLY")
  * @Route("/task")
  */
 class TaskController extends AbstractController
@@ -28,20 +27,26 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="task_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="task_new", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(int $id, Request $request): Response
     {
+        $projectRepository = $this->getDoctrine()->getRepository(Project::class);
+        $project = $projectRepository->find(['id' => $id]);
+
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $task->setProjectId($project);
+            $task->setRegistered(new \DateTime());
+            $task->setStatus("in progress");
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($task);
             $entityManager->flush();
-
-            return $this->redirectToRoute('task_index');
+            // return $this->redirectToRoute("project_show", ["id" => $task->getProjectId()->getId()]);
+            return $this->redirectToRoute('project_index');
         }
 
         return $this->render('task/new.html.twig', [

@@ -7,3 +7,8 @@
   .indieFlower {
   font-family: IndieFlower-Regular;
 }
+
+.form-control{
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
