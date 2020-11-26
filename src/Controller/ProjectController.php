@@ -31,6 +31,18 @@ class ProjectController extends AbstractController
     }
 
     /**
+     * @Route("/archive", name="project_archived", methods={"GET"})
+     */
+    public function archive(): Response
+    {
+        $user = $this->getUser();
+        $projects = $user->getProjects();
+        return $this->render('project/archive.html.twig', [
+            'projects' => $projects,
+        ]);
+    }
+
+    /**
      * @Route("/new", name="project_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response

@@ -11,29 +11,32 @@
     </div>
     <img src="\img\chantier.jpg" alt="chantier">
     <div class="card-body">
-        <h5 class="card-title d-flex justify-content-between">A faire</h5>
+        <h3 class="indieFlower card-title d-flex justify-content-center">A faire</h3>
     </div>
     <ul class="list-group list-group-flush">
         {% for task in tasks %}
-            <li class="list-group-item d-flex justify-content-between">
-                <span class="indieFlower">{{ task.title }}</span>
-                <div>
-                    <span>Deadline: {{ task.deadline|date('Y-m-d')  }}</span>
-                    <button type="button" class="btn btn-outline-primary">Modifier</button>
-                </div>
+            <a href="{{ path('task_edit', {'id': task.id}) }}" style="text-decoration:none">
+            {% if task.getStatus() == 'done' %}
+                <li class="list-group-item bg-success text-white">
+                {% else %}
+                    <li class="list-group-item">
+            {% endif %}
+            <h4 class="d-flex justify-content-center">{{ task.title }}</h4>
+            <span class="d-flex justify-content-end">Deadline: {{ task.deadline|date('Y-m-d')  }}</span>
             </li>
+            </a>
         {% endfor %}
     </ul>
-    <div class="card-body">
-        <a href="{{ path('task_new', {id: project.id}) }}" class="card-link">Ajouter une tâche</a>
-    </div>
+    <a href="{{ path('task_new', {id: project.id}) }}" class="card-link card-body bg-primary">
+        <h4 class="d-flex justify-content-center my-2 text-white">Ajouter une tâche</h4>
+    </a>
     <div class="card-footer text-muted">
-        Deadline du projet : {{ project.deadline }}
+        Deadline du projet : {{ project.deadline|date('Y-m-d') }}
     </div>
 </div>
-<a href="{{ path('project_index') }}">back to list</a>
+<a class="btn btn-outline-primary mr-2" href="{{ path('project_index') }}">Retour</a>
 
-<a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+<a class="btn btn-outline-success" href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
 
     {{ include('project/_delete_form.html.twig') }}
 {% endblock %}

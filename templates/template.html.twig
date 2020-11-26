@@ -17,7 +17,7 @@
         <a class="nav-link text-white" href="{{ path('project_new') }}">Nouveau projet</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">Projets archivés</a>
+        <a class="nav-link text-white" href="{{ path('project_archived') }}">Projets archivés</a>
       </li>
     </ul>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}

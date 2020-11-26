@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProjectType extends AbstractType
 {
@@ -15,7 +16,11 @@ class ProjectType extends AbstractType
         $builder
             ->add('title', null,['label' => 'Titre'])
             ->add('description')
-            ->add('deadline', DateType::class, ['placeholder' => ['year' => 'Année', 'month' => 'Mois', 'day' => 'Jour']]);
+            ->add('deadline', DateType::class, ['placeholder' => ['year' => 'Année', 'month' => 'Mois', 'day' => 'Jour']])
+            ->add('status', ChoiceType::class, array("label" => "Statut",
+                'choices' => array('En cours' => 'in progress', 'Terminé' => 'done'),
+            ))
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
