@@ -45,8 +45,8 @@ class TaskController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($task);
             $entityManager->flush();
-            // return $this->redirectToRoute("project_show", ["id" => $task->getProjectId()->getId()]);
-            return $this->redirectToRoute('project_index');
+            
+            return $this->redirectToRoute('project_show', ["id" => $task->getProjectId()->getId()]);
         }
 
         return $this->render('task/new.html.twig', [
