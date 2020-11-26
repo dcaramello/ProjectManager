@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Project|null findOneBy(array $criteria, array $orderBy = null)
  * @method Project[]    findAll()
  * @method Project[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Project[]    findProjectByDeadline()
  */
 class ProjectRepository extends ServiceEntityRepository
 {
@@ -18,6 +19,18 @@ class ProjectRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Project::class);
     }
+
+    public function findProjectByDeadline(Project $project): ?Project
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect("p")
+            ->orderBy("p.deadline", "DESC")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 
     // /**
     //  * @return Project[] Returns an array of Project objects

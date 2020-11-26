@@ -23,10 +23,14 @@ class ProjectController extends AbstractController
      */
     public function index(): Response
     {
+        
         $user = $this->getUser();
         $projects = $user->getProjects();
         return $this->render('project/index.html.twig', [
             'projects' => $projects,
+            // faire la requete de tri par deadline, tester avec :
+            // 'projects' => $projects->findProjectByDeadline(),
+            // en modifiant, mais suivre cette idée
         ]);
     }
 
