@@ -23,6 +23,14 @@
             {% endif %}
             <h4 class="d-flex justify-content-center">{{ task.title }}</h4>
             <span class="d-flex justify-content-end">Deadline: {{ task.deadline|date('Y-m-d')  }}</span>
+            <p class="d-flex justify-content-end">{% set difference = date(task.deadline).diff(date(date)) %}
+            {% set leftDays = difference.days %}
+                {% if leftDays == 1 %}
+                1 day
+                {% else %}
+                {{ leftDays }} jours restants
+            {% endif %}
+        </p>
             </li>
             </a>
         {% endfor %}
@@ -32,7 +40,16 @@
     </a>
     <div class="card-footer text-muted">
         Deadline du projet : {{ project.deadline|date('Y-m-d') }}
+        <p>{% set difference = date(project.deadline).diff(date(date)) %}
+            {% set leftDays = difference.days %}
+                {% if leftDays == 1 %}
+                1 day
+                {% else %}
+                {{ leftDays }} jours restants
+            {% endif %}
+        </p>
     </div>
+    
 </div>
 <a class="btn btn-outline-primary mr-2" href="{{ path('project_index') }}">Retour</a>
 

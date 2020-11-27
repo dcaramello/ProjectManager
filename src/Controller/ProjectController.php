@@ -24,11 +24,13 @@ class ProjectController extends AbstractController
      */
     public function index(ProjectRepository $projectRepository): Response
     {
+        $date = date("d-m-Y");
         return $this->render('project/index.html.twig', [
             'projects' => $projectRepository->findBy(
                 array('user_id' => $this->getUser()->getId()),
-                array('deadline' => 'ASC')
+                array('deadline' => 'ASC'),
             ),
+            'date' => $date,
         ]);
     }
 
@@ -79,7 +81,9 @@ class ProjectController extends AbstractController
      */
     public function show(Project $project, TaskRepository $taskRepository): Response
     {   
+        $date = date("d-m-Y");
         return $this->render('project/show.html.twig', [
+            'date' => $date,
             'project' => $project,
             'tasks' => $taskRepository->findBy(
                 array('project_id' => $project),
