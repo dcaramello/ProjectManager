@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Entity\Task;
 use App\Form\ProjectType;
+use App\Repository\TaskRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,28 +22,27 @@ class ProjectController extends AbstractController
     /**
      * @Route("/", name="project_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(ProjectRepository $projectRepository): Response
     {
-        
-        $user = $this->getUser();
-        $projects = $user->getProjects();
         return $this->render('project/index.html.twig', [
-            'projects' => $projects,
-            // faire la requete de tri par deadline, tester avec :
-            // 'projects' => $projects->findProjectByDeadline(),
-            // en modifiant, mais suivre cette idée
+            'projects' => $projectRepository->findBy(
+                array('user_id' => $this->getUser()->getId()),
+                array('deadline' => 'ASC')
+            ),
         ]);
     }
 
     /**
      * @Route("/archive", name="project_archived", methods={"GET"})
      */
-    public function archive(): Response
+    public function archive(ProjectRepository $projectRepository): Response
     {
-        $user = $this->getUser();
-        $projects = $user->getProjects();
+        
         return $this->render('project/archive.html.twig', [
-            'projects' => $projects,
+            'projects' => $projectRepository->findBy(
+                array('user_id' => $this->getUser()->getId()),
+                array('deadline' => 'ASC'),
+            ),
         ]);
     }
 
@@ -77,13 +77,13 @@ class ProjectController extends AbstractController
     /**
      * @Route("/{id}", name="project_show", methods={"GET"})
      */
-    public function show(Project $project): Response
+    public function show(Project $project, TaskRepository $taskRepository): Response
     {   
-        $tasks = $project->getTasks();
-        
         return $this->render('project/show.html.twig', [
             'project' => $project,
-            'tasks' => $tasks,
+            'tasks' => $taskRepository->findBy(
+                array('project_id' => $project),
+                array('deadline' => 'ASC')),
         ]);
     }
 

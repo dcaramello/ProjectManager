@@ -26,6 +26,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
         $project->setTitle("Projet n°$i")
                 ->setDescription("Lorem ipsum dolor sit amet consectetur adipisicing elit.")
                 ->setRegistered(new \DateTime())
+                ->setDeadline(new \DateTime())
                 ->setUserId($user)
                 ->setStatus("in progress");
 
