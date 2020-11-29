@@ -9,10 +9,7 @@
     <div class="card-body">
         <h5 class="card-title d-flex justify-content-center">{{ project.description }}</h5>
     </div>
-    <img src="\img\chantier.jpg" alt="chantier">
-    <div class="card-body">
-        <h3 class="indieFlower card-title d-flex justify-content-center">A faire</h3>
-    </div>
+        <h3 class="indieFlower card-header d-flex justify-content-center">A faire</h3>
     <ul class="list-group list-group-flush">
         {% for task in tasks %}
             <a href="{{ path('task_edit', {'id': task.id}) }}" style="text-decoration:none">
