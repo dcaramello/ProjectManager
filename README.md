@@ -1,6 +1,6 @@
-        ##Semaine 21 : Évaluation finale
+#              Semaine 21 : Évaluation finale
 
-#Objectif :
+## Objectif :
 Cette semaine vous réalisez la dernière évaluation de votre parcours de formation. Vous allez donc
 être évalués sur les deux activités types de votre titre professionnel, à savoir développer la partie
 front-end et développer la partie back-end d’une application web ou web mobile.
@@ -14,7 +14,7 @@ Compétences évaluées :
 • Elaborer et mettre en œuvre des composants dans une application de gestion de contenu ou
 e-commerce
 
-#Sujet :
+## Sujet :
 Développeur web PHP dans une agence, on vous a confié la réalisation d’une application métier
 pour un client travaillant dans le bâtiment.
 Jusqu’à maintenant, les conducteurs de travaux de ce client utilisent des cahiers, des tableaux blancs
@@ -58,7 +58,7 @@ relations
 pour les version mobiles, tablettes et PC
 • Le projet est géré à l’aide d’un outil de type Kanban
 
-#Spécifications techniques :
+## Spécifications techniques :
 - Framework Symfony 5
 - L’usage de la commande generate crud est autorisé
 - Sécurité de l’application gérée avec le bundle de sécurité Symfony
@@ -68,12 +68,12 @@ Le rendu se fera via Teams avant dimanche soir minuit dans le dossier rendu vous
 un fichier txt à votre nom avec le lien vers votre repository GitHub qui contiendra votre
 projet.
 
-#Présentation du projet :
+## Présentation du projet :
 Afin de vous préparer à la certification et au passage devant le jury, vous allez en guise de
 correction du projet présenter ce dernier et serez questionnez sur son code et sa réalisation.
 Durée maximum de la présentation 35min.
 
-#Vous présenterez votre projet à l’aide d’un support de type PowerPoint respectant le plan suivant :
+## Vous présenterez votre projet à l’aide d’un support de type PowerPoint respectant le plan suivant :
 • Présentation du contexte du projet, de l’entreprise, de l’environnement et/ou du besoin
 • Conception et développement de la partie front-end
 • Présentation détaillée des éléments les plus significatifs de l’interface de l’application
