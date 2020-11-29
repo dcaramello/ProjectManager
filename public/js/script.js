@@ -1,6 +1,4 @@
-$(document).ready(function() {
-    // you may need to change this code if you are not using Bootstrap Datepicker
-    $('.js-datepicker').datepicker({
-        format: 'yyyy-mm-dd'
-    });
-});
+
+var d = new Date();
+var date = d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+document.getElementById('date').innerHTML = date;

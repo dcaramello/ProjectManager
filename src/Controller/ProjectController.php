@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Entity\Task;
 use App\Form\ProjectType;
+use App\Repository\TaskRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,12 +22,29 @@ class ProjectController extends AbstractController
     /**
      * @Route("/", name="project_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(ProjectRepository $projectRepository): Response
     {
-        $user = $this->getUser();
-        $projects = $user->getProjects();
+        $date = date("d-m-Y");
         return $this->render('project/index.html.twig', [
-            'projects' => $projects,
+            'projects' => $projectRepository->findBy(
+                array('user_id' => $this->getUser()->getId()),
+                array('deadline' => 'ASC'),
+            ),
+            'date' => $date,
+        ]);
+    }
+
+    /**
+     * @Route("/archive", name="project_archived", methods={"GET"})
+     */
+    public function archive(ProjectRepository $projectRepository): Response
+    {
+        
+        return $this->render('project/archive.html.twig', [
+            'projects' => $projectRepository->findBy(
+                array('user_id' => $this->getUser()->getId()),
+                array('deadline' => 'ASC'),
+            ),
         ]);
     }
 
@@ -61,13 +79,15 @@ class ProjectController extends AbstractController
     /**
      * @Route("/{id}", name="project_show", methods={"GET"})
      */
-    public function show(Project $project): Response
+    public function show(Project $project, TaskRepository $taskRepository): Response
     {   
-        $tasks = $project->getTasks();
-        
+        $date = date("d-m-Y");
         return $this->render('project/show.html.twig', [
+            'date' => $date,
             'project' => $project,
-            'tasks' => $tasks,
+            'tasks' => $taskRepository->findBy(
+                array('project_id' => $project),
+                array('deadline' => 'ASC')),
         ]);
     }
 

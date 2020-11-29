@@ -26,7 +26,7 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
             $task->setTitle("Tâche n°$i")
                  ->setRegistered(new \DateTime())
                  ->setStatus("in progress")
-                 ->setProjectId($project[0]);
+                 ->setProjectId($project);
 
                 $manager->persist($task);
         }
