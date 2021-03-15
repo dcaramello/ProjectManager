@@ -1,4 +1,4 @@
-#              Semaine 21 : Évaluation finale
+## Projet Réalisé pendant ma formation Développeur Web et Web Mobile à l'Afpa de Saint Etienne du Rouvray
 
 ## Objectif :
 Cette semaine vous réalisez la dernière évaluation de votre parcours de formation. Vous allez donc
@@ -67,18 +67,3 @@ pour les version mobiles, tablettes et PC
 Le rendu se fera via Teams avant dimanche soir minuit dans le dossier rendu vous déposerez
 un fichier txt à votre nom avec le lien vers votre repository GitHub qui contiendra votre
 projet.
-
-## Présentation du projet :
-Afin de vous préparer à la certification et au passage devant le jury, vous allez en guise de
-correction du projet présenter ce dernier et serez questionnez sur son code et sa réalisation.
-Durée maximum de la présentation 35min.
-
-## Vous présenterez votre projet à l’aide d’un support de type PowerPoint respectant le plan suivant :
-- Présentation du contexte du projet, de l’entreprise, de l’environnement et/ou du besoin
-- Conception et développement de la partie front-end
-- Présentation détaillée des éléments les plus significatifs de l’interface de l’application
-(possibilité de démonstration)
-- Conception et développement de la partie back-end
-- Présentation détaillée de la fonctionnalité back-end la plus significative
-- Présentation d’un problème et de la documentation anglophone ayant permis de la résoudre
-- Conclusion (échecs et réussites/satisfactions)
